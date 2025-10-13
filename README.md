@@ -292,7 +292,6 @@ This application is developed for educational and research purposes only. It sho
 For technical support or project inquiries, please contact any team member using the email addresses provided above.
 
 ## Demo Video
-https://drive.google.com/file/d/1WBq4QUw8TL_esOdzjvujXo6I-Cxu-GN_/view?usp=sharing
-
+https://drive.google.com/file/d/1d5KCNWoKFrYilVkajv_WNTjq-wIuKZGT/view?usp=sharing
 ---
 **Built with ❤️ by the GP-Tea Team for advancing AI in Healthcare**
