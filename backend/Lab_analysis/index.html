@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lab Report Analysis</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      .content {
+        padding: 40px;
+      }
+
+      .upload-section {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .upload-area {
+        border: 3px dashed #4facfe;
+        border-radius: 15px;
+        padding: 50px 20px;
+        margin-bottom: 20px;
+        background: #f8fbff;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .upload-area:hover {
+        background: #e8f4ff;
+        border-color: #0084ff;
+      }
+
+      .upload-area.dragover {
+        background: #e8f4ff;
+        border-color: #0084ff;
+        transform: scale(1.02);
+      }
+
+      .upload-icon {
+        font-size: 4rem;
+        color: #4facfe;
+        margin-bottom: 20px;
+      }
+
+      .upload-text {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 10px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+      }
+
+      .btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .preview-section {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .preview-image {
+        max-width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+      }
+
+      .results-section {
+        margin-top: 30px;
+        display: none;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #4facfe;
+      }
+
+      .loading-spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #4facfe;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 20px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .results-content {
+        background: #f8fbff;
+        border-radius: 15px;
+        padding: 30px;
+        border-left: 5px solid #4facfe;
+      }
+
+      .result-title {
+        color: #333;
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .analysis-block {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .analysis-block h3 {
+        color: #4facfe;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .analysis-block p {
+        color: #555;
+        line-height: 1.6;
+        font-size: 1rem;
+      }
+
+      .findings-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .findings-list li {
+        background: #f0f8ff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 8px;
+        border-left: 4px solid #4facfe;
+        color: #333;
+      }
+
+      .findings-list li:before {
+        content: "•";
+        color: #4facfe;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .error-message {
+        background: #ffe6e6;
+        color: #d63031;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #d63031;
+        margin: 20px 0;
+      }
+
+      .success-message {
+        background: #e6ffe6;
+        color: #00b894;
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid #00b894;
+        margin: 20px 0;
+      }
+
+      .disclaimer {
+        background: #fff3cd;
+        color: #856404;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ffeaa7;
+        margin-top: 20px;
+        font-style: italic;
+      }
+
+      .raw-response {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 15px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .upload-area {
+          padding: 30px 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🔬 Lab Report Analysis</h1>
+        <p>AI-powered medical lab report analysis service</p>
+      </div>
+
+      <div class="content">
+        <div class="upload-section">
+          <div
+            class="upload-area"
+            onclick="document.getElementById('fileInput').click()"
+          >
+            <div class="upload-icon">📄</div>
+            <div class="upload-text">
+              Drag and drop your lab report image here<br />
+              or click to select a file
+            </div>
+            <div class="supported-formats">
+              <small>Supports: JPG, PNG, BMP, TIFF, WEBP</small>
+            </div>
+          </div>
+
+          <input
+            type="file"
+            id="fileInput"
+            class="file-input"
+            accept="image/*"
+          />
+
+          <button
+            class="btn"
+            id="analyzeBtn"
+            disabled
+            onclick="analyzeReport()"
+          >
+            🔍 Analyze Lab Report
+          </button>
+        </div>
+
+        <div class="preview-section" id="previewSection" style="display: none">
+          <h3>Selected File:</h3>
+          <div id="imagePreview"></div>
+        </div>
+
+        <div class="results-section" id="resultsSection">
+          <div class="loading" id="loadingDiv" style="display: none">
+            <div class="loading-spinner"></div>
+            <h3>Analyzing your lab report...</h3>
+            <p>Please wait while our AI processes your image</p>
+          </div>
+
+          <div id="resultsContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = "http://localhost:8000";
+      let selectedFile = null;
+
+      // Get DOM elements
+      const fileInput = document.getElementById("fileInput");
+      const uploadArea = document.querySelector(".upload-area");
+      const analyzeBtn = document.getElementById("analyzeBtn");
+      const previewSection = document.getElementById("previewSection");
+      const imagePreview = document.getElementById("imagePreview");
+      const resultsSection = document.getElementById("resultsSection");
+      const loadingDiv = document.getElementById("loadingDiv");
+      const resultsContent = document.getElementById("resultsContent");
+
+      // Event listeners
+      fileInput.addEventListener("change", handleFileSelect);
+      uploadArea.addEventListener("dragover", handleDragOver);
+      uploadArea.addEventListener("dragleave", handleDragLeave);
+      uploadArea.addEventListener("drop", handleDrop);
+
+      function handleFileSelect(event) {
+        const file = event.target.files[0];
+        if (file && file.type.startsWith("image/")) {
+          selectedFile = file;
+          showPreview(file);
+          analyzeBtn.disabled = false;
+        } else {
+          showError("Please select a valid image file");
+        }
+      }
+
+      function handleDragOver(event) {
+        event.preventDefault();
+        uploadArea.classList.add("dragover");
+      }
+
+      function handleDragLeave(event) {
+        event.preventDefault();
+        uploadArea.classList.remove("dragover");
+      }
+
+      function handleDrop(event) {
+        event.preventDefault();
+        uploadArea.classList.remove("dragover");
+
+        const files = event.dataTransfer.files;
+        if (files.length > 0 && files[0].type.startsWith("image/")) {
+          selectedFile = files[0];
+          showPreview(files[0]);
+          analyzeBtn.disabled = false;
+        } else {
+          showError("Please drop a valid image file");
+        }
+      }
+
+      function showPreview(file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          imagePreview.innerHTML = `
+                    <img src="${
+                      e.target.result
+                    }" alt="Lab Report Preview" class="preview-image">
+                    <p><strong>File:</strong> ${file.name} (${(
+            file.size /
+            1024 /
+            1024
+          ).toFixed(2)} MB)</p>
+                `;
+          previewSection.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      async function analyzeReport() {
+        if (!selectedFile) {
+          showError("Please select an image file first");
+          return;
+        }
+
+        // Show loading
+        resultsSection.style.display = "block";
+        loadingDiv.style.display = "block";
+        resultsContent.innerHTML = "";
+        analyzeBtn.disabled = true;
+
+        try {
+          console.log("🔄 Sending file to API:", selectedFile.name);
+
+          const formData = new FormData();
+          formData.append("file", selectedFile);
+
+          const response = await fetch(`${API_URL}/analyze`, {
+            method: "POST",
+            body: formData,
+          });
+
+          console.log("📡 Response status:", response.status);
+          const responseData = await response.json();
+          console.log("📊 Full response data:", responseData);
+
+          loadingDiv.style.display = "none";
+
+          if (response.ok && responseData.success) {
+            console.log("✅ Analysis successful, displaying results");
+            displayResults(responseData.analysis);
+          } else {
+            console.error("❌ Analysis failed:", responseData);
+            showError(
+              responseData.detail || responseData.message || "Analysis failed"
+            );
+          }
+        } catch (error) {
+          console.error("🚨 Connection error:", error);
+          loadingDiv.style.display = "none";
+          showError(
+            `Connection error: ${error.message}. Make sure the API server is running on http://localhost:8000`
+          );
+        }
+
+        analyzeBtn.disabled = false;
+      }
+
+      function displayResults(analysis) {
+        console.log("🎨 Displaying analysis results:", analysis);
+
+        if (analysis.error) {
+          showError(analysis.message || "Analysis failed");
+          return;
+        }
+
+        let html = `
+                <div class="results-content">
+                    <h2 class="result-title">📋 Analysis Results</h2>
+            `;
+
+        // Summary
+        if (analysis.summary && analysis.summary.trim()) {
+          console.log("📝 Adding summary:", analysis.summary);
+          html += `
+                    <div class="analysis-block">
+                        <h3>📝 Summary</h3>
+                        <p>${analysis.summary}</p>
+                    </div>
+                `;
+        }
+
+        // Key Findings
+        if (
+          analysis.key_findings &&
+          Array.isArray(analysis.key_findings) &&
+          analysis.key_findings.length > 0
+        ) {
+          console.log("🔍 Adding key findings:", analysis.key_findings);
+          html += `
+                    <div class="analysis-block">
+                        <h3>🔍 Key Findings</h3>
+                        <ul class="findings-list">
+                            ${analysis.key_findings
+                              .map((finding) => `<li>${finding}</li>`)
+                              .join("")}
+                        </ul>
+                    </div>
+                `;
+        }
+
+        // Interpretation
+        if (analysis.interpretation && analysis.interpretation.trim()) {
+          console.log("💡 Adding interpretation:", analysis.interpretation);
+          html += `
+                    <div class="analysis-block">
+                        <h3>💡 Interpretation</h3>
+                        <p>${analysis.interpretation}</p>
+                    </div>
+                `;
+        }
+
+        // Note/Disclaimer
+        if (analysis.note && analysis.note.trim()) {
+          console.log("⚠️ Adding note:", analysis.note);
+          html += `
+                    <div class="disclaimer">
+                        <strong>⚠️ Important Note:</strong> ${analysis.note}
+                    </div>
+                `;
+        }
+
+        // If no structured data is available, show raw response
+        const hasStructuredData =
+          (analysis.summary && analysis.summary.trim()) ||
+          (analysis.key_findings && analysis.key_findings.length > 0) ||
+          (analysis.interpretation && analysis.interpretation.trim()) ||
+          (analysis.note && analysis.note.trim());
+
+        if (!hasStructuredData) {
+          console.log("📄 No structured data found, showing raw response");
+          html += `
+                    <div class="analysis-block">
+                        <h3>📄 Analysis Result</h3>
+                        <div class="raw-response">${
+                          analysis.raw_response ||
+                          JSON.stringify(analysis, null, 2)
+                        }</div>
+                    </div>
+                `;
+        } else {
+          // Always show raw response for debugging
+          if (analysis.raw_response) {
+            html += `
+                        <details style="margin-top: 20px;">
+                            <summary style="cursor: pointer; color: #666; font-size: 0.9rem;">🔧 Show Raw AI Response (Debug)</summary>
+                            <div class="raw-response" style="margin-top: 10px;">${analysis.raw_response}</div>
+                        </details>
+                    `;
+          }
+        }
+
+        html += "</div>";
+        resultsContent.innerHTML = html;
+        console.log("✨ Results displayed successfully");
+      }
+
+      function showError(message) {
+        console.error("❌ Showing error:", message);
+        resultsContent.innerHTML = `
+                <div class="error-message">
+                    <h3>❌ Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        resultsSection.style.display = "block";
+      }
+
+      // Check API health on page load
+      window.addEventListener("load", async () => {
+        try {
+          console.log("🏥 Checking API health...");
+          const response = await fetch(`${API_URL}/health`);
+          if (response.ok) {
+            const data = await response.json();
+            console.log("✅ API is healthy:", data);
+          } else {
+            console.warn("⚠️ API health check failed:", response.status);
+          }
+        } catch (error) {
+          console.warn("⚠️ Cannot connect to API:", error.message);
+          showError(
+            "Cannot connect to the API server. Please make sure the server is running on http://localhost:8000"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,130 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Python Backend Files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# ML Models and Data Files (IMPORTANT: Exclude all model files)
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.pb
+*.pth
+*.pt
+*.ckpt
+*.model
+*.joblib
+*.json.gz
+*.npy
+*.npz
+*.csv
+*.xlsx
+*.xls
+*.parquet
+*.feather
+*.dta
+*.sav
+*.sas7bdat
+
+# Specific Backend Model Files
+backend/Text_classification/symptom_checker/symptom_model.json
+backend/Text_classification/symptom_checker/symptom_model.labels.npy
+backend/Text_classification/symptom_checker/symptom_model.features.txt
+backend/Text_classification/symptom_checker/cleaned_dataset.csv
+backend/Text_classification/symptom_checker/Disease\ and\ symptoms\ dataset.csv
+backend/Image_classification/models/
+backend/Image_classification/*.h5
+backend/Image_classification/*.json
+backend/Lab_analysis/models/
+backend/Lab_analysis/*.pkl
+backend/Lab_analysis/*.json
+
+# Large archive files
+*.zip
+backend/Text_classification/symptom_checker.zip
+backend/Lab_analysis/Lab_analysis.zip
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Large datasets and temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# OS generated files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
