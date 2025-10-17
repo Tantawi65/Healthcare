@@ -293,5 +293,10 @@ For technical support or project inquiries, please contact any team member using
 
 ## Demo Video
 https://drive.google.com/file/d/1d5KCNWoKFrYilVkajv_WNTjq-wIuKZGT/view?usp=sharing
+
+## 🧠 AI Usage
+
+This project integrates **Generative AI tools** throughout the development process to enhance productivity, code quality, and documentation.  
+All **screenshots, prompts, and AI responses** used during development are organized and available in the repository under the folder "AI Usage".
 ---
 **Built with ❤️ by the GP-Tea Team for advancing AI in Healthcare**
