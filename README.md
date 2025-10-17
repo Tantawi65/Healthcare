@@ -279,17 +279,30 @@ For production deployment, consider using:
 
 This application is developed for educational and research purposes only. It should not be used as a substitute for professional medical advice, diagnosis, or treatment. Always consult with qualified healthcare professionals for medical concerns.
 
-## 🤝 Contributing
+## 📲 Try the Application
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+You can download and try the latest build of the **AI in Healthcare** application from the link below:
 
-## 📞 Support
+[Download Application](https://drive.google.com/file/d/10opWPUUOJsTkXuGMDGSNiDKNFgaCFS_G/view?usp=sharing)
 
-For technical support or project inquiries, please contact any team member using the email addresses provided above.
+---
+
+## 🌐 Live Deployment
+
+The backend services are deployed and accessible online for testing and demonstration purposes.  
+Each service runs on a separate FastAPI instance with integrated AI models.
+
+### 🔬 Lab Analysis Service
+Analyze lab reports using AI-powered document understanding:
+👉 [https://tantawi-lab-analyzer.hf.space/](https://tantawi-lab-analyzer.hf.space/)
+
+### 🖼️ Image Classification Service
+Classify medical images and detect cancerous patterns:
+👉 [https://tantawi-image-class.hf.space/docs](https://tantawi-image-class.hf.space/docs)
+
+### 💬 Symptom Checker (Text Classification)
+Predict possible diseases based on user-entered symptoms:
+👉 [https://tantawi-text-classification.hf.space/docs](https://tantawi-text-classification.hf.space/docs)
 
 ## Demo Video
 https://drive.google.com/file/d/1d5KCNWoKFrYilVkajv_WNTjq-wIuKZGT/view?usp=sharing
@@ -298,5 +311,9 @@ https://drive.google.com/file/d/1d5KCNWoKFrYilVkajv_WNTjq-wIuKZGT/view?usp=shari
 
 This project integrates **Generative AI tools** throughout the development process to enhance productivity, code quality, and documentation.  
 All **screenshots, prompts, and AI responses** used during development are organized and available in the repository under the folder "AI Usage".
+
+## 📞 Support
+
+For technical support or project inquiries, please contact any team member using the email addresses provided above.
 ---
 **Built with ❤️ by the GP-Tea Team for advancing AI in Healthcare**
